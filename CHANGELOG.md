@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.5.0](https://github.com/material-components/material-web/compare/v1.4.1...v1.5.0) (2024-05-02)
+
+
+### Features
+
+* **menu:** allow customizing `scrollbar-width` ([1bf8b5f](https://github.com/material-components/material-web/commit/1bf8b5fbf9ff8f7c0084acee77988b1af9ad7e19))
+
+
+### Bug Fixes
+
+* **dialog:** focus is trapped for a11y, use `no-focus-trap` to disable ([0aea436](https://github.com/material-components/material-web/commit/0aea4364a142f3db84b77ae99eea1df6a3cd8456))
+
 ## [1.4.1](https://github.com/material-components/material-web/compare/v1.4.0...v1.4.1) (2024-04-15)
 
 
