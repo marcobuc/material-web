@@ -461,6 +461,20 @@ export abstract class Menu extends LitElement {
     this.cleanUpGlobalEventListeners();
   }
 
+  override getBoundingClientRect() {
+    if (!this.surfaceEl) {
+      return super.getBoundingClientRect();
+    }
+    return this.surfaceEl.getBoundingClientRect();
+  }
+
+  override getClientRects() {
+    if (!this.surfaceEl) {
+      return super.getClientRects();
+    }
+    return this.surfaceEl.getClientRects();
+  }
+
   protected override render() {
     return this.renderSurface();
   }
@@ -756,20 +770,18 @@ export abstract class Menu extends LitElement {
    */
   private animateClose() {
     let resolve!: (value: unknown) => void;
-    let reject!: () => void;
 
     // This promise blocks the surface position controller from setting
     // display: none on the surface which will interfere with this animation.
-    const animationEnded = new Promise((res, rej) => {
+    const animationEnded = new Promise((res) => {
       resolve = res;
-      reject = rej;
     });
 
     const surfaceEl = this.surfaceEl;
     const slotEl = this.slotEl;
 
     if (!surfaceEl || !slotEl) {
-      reject();
+      resolve(false);
       return animationEnded;
     }
 
@@ -856,7 +868,7 @@ export abstract class Menu extends LitElement {
         animation.cancel();
         child.classList.toggle('md-menu-hidden', false);
       });
-      reject();
+      resolve(false);
     });
 
     surfaceHeightAnimation.addEventListener('finish', () => {

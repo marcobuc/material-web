@@ -107,6 +107,12 @@ export abstract class Select extends selectBaseClass {
   @property() label = '';
 
   /**
+   * Disables the asterisk on the floating label, when the select is
+   * required.
+   */
+  @property({type: Boolean, attribute: 'no-asterisk'}) noAsterisk = false;
+
+  /**
    * Conveys additional information below the select, such as how it should
    * be used.
    */
@@ -206,7 +212,7 @@ export abstract class Select extends selectBaseClass {
   /**
    * Returns an array of selected options.
    *
-   * NOTE: md-select only suppoprts single selection.
+   * NOTE: md-select only supports single selection.
    */
   get selectedOptions() {
     return (this.getSelectedOptions() ?? []).map(([option]) => option);
@@ -395,6 +401,7 @@ export abstract class Select extends selectBaseClass {
           aria-controls="listbox"
           class="field"
           label=${this.label}
+          ?no-asterisk=${this.noAsterisk}
           .focused=${this.focused || this.open}
           .populated=${!!this.displayText}
           .disabled=${this.disabled}
